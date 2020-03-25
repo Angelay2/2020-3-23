@@ -44,8 +44,8 @@ void queuePush(Queue* q, Datatype data){
 	--q->_size;
 
 }
-// 队头删除 出队
 
+// 删除队头 出队
 void queuePop(Queue* q){
 	// 先判断空 
 	if (q->_front != NULL){
@@ -80,4 +80,13 @@ int queueEmpty(Queue* q){
 // 输出队列大小
 size_t QueueSize(Queue* q){
 	return q->_size;
+}
+
+void queueDestory(Queue* q){
+	Node* cur = q->_front;
+	while (cur){
+		Node* next = cur->_next;
+		free(cur);
+
+	}
 }

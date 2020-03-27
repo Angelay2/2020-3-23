@@ -30,6 +30,6 @@ Datatype queueBack(Queue* q);
 // 判空
 int queueEmpty(Queue* q);
 // 输出队列大小
-size_t QueueSize(Queue* q);
+size_t queueSize(Queue* q);
 
 void queueDestory(Queue* q);

@@ -41,14 +41,17 @@ void queuePush(Queue* q, Datatype data){
 	}
 	// 更新尾结点
 	q->_rear = node;
-	--q->_size;
+	++q->_size;
 
 }
 
 // 删除队头 出队
+// 判断队列不为空, 若不为空删除一个结点后还需判断队列此时是否为空 若为空 头和尾结点都指向NULL.
+// 先把头结点的next保存起来 然后再删除头结点 让头结点更新为next
 void queuePop(Queue* q){
 	// 先判断空 
 	if (q->_front != NULL){
+		
 		Node* next = q->_front->_next;
 		// 删除头结点
 		free(q->_front);
@@ -78,15 +81,19 @@ int queueEmpty(Queue* q){
 	return 0;
 }
 // 输出队列大小
-size_t QueueSize(Queue* q){
+size_t queueSize(Queue* q){
 	return q->_size;
 }
 
 void queueDestory(Queue* q){
 	Node* cur = q->_front;
+	// 如果头部位空, 则拿到头的next 然后free头 再更新 再free 直删除最后一个结点
 	while (cur){
 		Node* next = cur->_next;
 		free(cur);
-
+		cur = next;
 	}
+	// 删除最后一个结点后 需将头和尾都指向NULL
+	q->_rear = q->_front = NULL;
+	q->_size = 0;
 }

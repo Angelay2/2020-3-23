@@ -23,9 +23,9 @@ void queueInit(Queue* q){
 	q->_size = 0;
 }
 // 队尾插入 入队
-void queuePush(Queue* q, Datatype data){
+void queuePush(Queue* q, QDatatype data){
 	// 需要先创建新结点
-	Node* node = (Node*)malloc(sizeof(Node));
+	QNode* node = (QNode*)malloc(sizeof(QNode));
 	node->_data = data;
 	node->_next = NULL;
 	// 尾插
@@ -52,7 +52,7 @@ void queuePop(Queue* q){
 	// 先判断空 
 	if (q->_front != NULL){
 		
-		Node* next = q->_front->_next;
+		QNode* next = q->_front->_next;
 		// 删除头结点
 		free(q->_front);
 		// 更新头结点
@@ -65,11 +65,11 @@ void queuePop(Queue* q){
 	}
 }
 // 拿到队头元素
-Datatype queueFront(Queue* q){
+QDatatype queueFront(Queue* q){
 	return q->_front->_data;
 }
 // 拿到队尾元素
-Datatype queueBack(Queue* q){
+QDatatype queueBack(Queue* q){
 	return q->_rear->_data;
 }
 // 判空
@@ -86,10 +86,10 @@ size_t queueSize(Queue* q){
 }
 
 void queueDestory(Queue* q){
-	Node* cur = q->_front;
+	QNode* cur = q->_front;
 	// 如果头部位空, 则拿到头的next 然后free头 再更新 再free 直删除最后一个结点
 	while (cur){
-		Node* next = cur->_next;
+		QNode* next = cur->_next;
 		free(cur);
 		cur = next;
 	}

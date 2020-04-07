@@ -23,7 +23,7 @@
 // 直接让已经定义好的指针指向该块空间
 // 参数为结构体指针定义的栈和元素个数n 直接用定义的栈st可以访问其结构体内部定义的元素
 void stackInit(Stack* st, size_t n){
-	st->_array = (Datatype*)malloc(sizeof(Datatype) * n);
+	st->_array = (SDatatype*)malloc(sizeof(SDatatype) * n);
 	st->_size = 0;
 	st->_capacity = n;// 当前能存放多少元素 
 }
@@ -33,11 +33,11 @@ void stackInit(Stack* st, size_t n){
 // 增容即申请空间(为可以容纳的元素个数乘以类型大小)以及增加可以容纳的元素个数(最直接的办法乘以2)
 // 申请空间需将之前申请的空间初始化, 让_array指向重新申请的新空间(大小为2*原始容量) 
 // 申请完空间再更新容量
-void stackPush(Stack* st, Datatype data){
+void stackPush(Stack* st, SDatatype data){
 	// 检查容量
 	if (st->_size == st->_capacity){
 		// 增加空间和容量, 元素个数不变
-		st->_array = (Datatype*)realloc(st->_array, sizeof(Datatype) * 2 * st->_capacity);
+		st->_array = (SDatatype*)realloc(st->_array, sizeof(SDatatype) * 2 * st->_capacity);
 		st->_capacity *= 2; 
 	}
 	// 再进行尾插 让元素个数+1, 下标为size-1的为原始最后一个元素 新的元素应存放在下标为size的位置
@@ -53,7 +53,7 @@ void stackPop(Stack* st){
 }
 
 // 获取栈顶元素(即最后一个进入的元素)
-Datatype stackTop(Stack* st){
+SDatatype stackTop(Stack* st){
 	return st->_array[st->_size - 1];
 }
 
